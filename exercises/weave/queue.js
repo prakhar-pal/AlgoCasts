@@ -10,11 +10,20 @@ class Queue {
   }
 
   add(record) {
+  	// console.log('adding '+record);
     this.data.unshift(record);
   }
 
   remove() {
-    return this.data.pop();
+  	let item = this.data.pop();
+  	// console.log('removing '+item);
+    return item;
+  }
+  peek(){
+  	return this.data[this.data.length-1];
+  }
+  toString(){
+  	return this.data;
   }
 }
 

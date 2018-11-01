@@ -14,6 +14,34 @@
 
 const Stack = require('./stack');
 
-class Queue {}
+class Queue {
+	constructor(){
+		this.main = new Stack();
+		this.temp = new Stack();
+	}
+	add(record){
+		this.main.push(record);
+	}
+	remove(){
+		while(this.main.peek()){
+			this.temp.push(this.main.pop());
+		}
+		let out = this.temp.pop(); 
+		while(this.temp.peek()){
+			this.main.push(this.temp.pop());
+		}
+		return out;
+	}
+	peek(){
+		while(this.main.peek()){
+			this.temp.push(this.main.pop());
+		}
+		let out = this.temp.peek();
+		while(this.temp.peek()){
+			this.main.push(this.temp.pop());
+		}
+		return out;
+	}
+}
 
 module.exports = Queue;

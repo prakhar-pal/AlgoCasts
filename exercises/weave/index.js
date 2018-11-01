@@ -24,6 +24,34 @@
 
 const Queue = require('./queue');
 
-function weave(sourceOne, sourceTwo) {}
+function weave(sourceOne, sourceTwo) {
+	let in1=sourceOne.remove(),in2=sourceTwo.remove(),outQueue = new Queue();
+	while(in1 && in2){
+		outQueue.add(in1);
+		outQueue.add(in2);
+		in1=sourceOne.remove();
+		in2=sourceTwo.remove();
+	}
+	while(in1){
+		outQueue.add(in1);
+		in1=sourceOne.remove();
+	}
+	while(in2){
+		outQueue.add(in2);
+		in2=sourceTwo.remove();
+	}
+	// console.error('outQueue:'+JSON.stringify(outQueue));
+	return outQueue;
+}
 
+ const queueOne = new Queue();
+   queueOne.add(1);
+   queueOne.add(2);
+ // console.log('q1:'+queueOne.toString());
+const queueTwo = new Queue();
+   queueTwo.add('Hi');
+   queueTwo.add('There');
+   // console.log('q2:'+queueTwo.toString());
+   const q = weave(queueOne, queueTwo);
+// console.log(q);
 module.exports = weave;
