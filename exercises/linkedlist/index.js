@@ -16,6 +16,14 @@ class LinkedList {
 	insertFirst(record){
 		this.head = new Node(record,this.head);
 	}
+	insertLast(record){
+		let last = this.getLast();
+		if(!last){
+			this.head = new Node(record);
+		}else{
+			last.next = new Node(record);
+		}
+	}
 	size(){
 		let head = this.head,count=0;
 		while(!(!head)) {count++;head = head.next;}
@@ -34,6 +42,28 @@ class LinkedList {
 	}
 	clear(){
 		this.head=null;
+	}
+	getAt(index){
+		let size = this.size();
+		if(index>size-1)
+			return null;
+		let count = 0;
+		let head = this.head;
+		while(count<index){
+			head = head.next;
+			count++;
+		}
+		return head;
+
+	}
+	forEach(cb){
+		let index = 0;
+		let head = this.head;
+		while(head){
+			cb(head);
+			head=head.next;
+			index++;
+		}
 	}
 }
 
